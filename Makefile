@@ -41,7 +41,7 @@ YTLITE_DEB = $(YTLITE_PATH)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.de
 YTLITE_DYLIB = $(YTLITE_PATH)/var/jb/Library/MobileSubstrate/DynamicLibraries/YTLite.dylib
 YTLITE_BUNDLE = $(YTLITE_PATH)/var/jb/Library/Application\ Support/YTLite.bundle
 before-package::
-    @mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support; cp -r Localizations/YTLitePlus.bundle $(THEOS_STAGING_DIR)/Library/Application\ Support/
+	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support; cp -r Localizations/YTLitePlus.bundle $(THEOS_STAGING_DIR)/Library/Application\ Support/
 
 internal-clean::
 	@rm -rf $(YTLITE_PATH)/*
