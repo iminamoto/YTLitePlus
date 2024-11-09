@@ -15,6 +15,8 @@ export DEBUGFLAG = -ggdb -Wno-unused-command-line-argument -L$(THEOS_OBJ_DIR) -F
 MODULES = jailed
 endif
 
+PACKAGE_NAME = $(TWEAK_NAME)
+PACKAGE_VERSION = X.X.X-X.X
 INSTALL_TARGET_PROCESSES = YouTube
 TWEAK_NAME = YTLitePlus
 DISPLAY_NAME = YouTube
