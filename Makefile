@@ -15,6 +15,9 @@ export DEBUGFLAG = -ggdb -Wno-unused-command-line-argument -L$(THEOS_OBJ_DIR) -F
 MODULES = jailed
 endif
 
+ifndef YTLITE_VERSION
+YTLITE_VERSION := 5.0.1
+endif
 PACKAGE_NAME = $(TWEAK_NAME)
 PACKAGE_VERSION = X.X.X-X.X
 INSTALL_TARGET_PROCESSES = YouTube
@@ -34,7 +37,7 @@ $(TWEAK_NAME)_EMBED_EXTENSIONS = $(wildcard Extensions/*.appex)
 
 include $(THEOS)/makefiles/common.mk
 ifneq ($(JAILBROKEN),1)
-SUBPROJECTS += Tweaks/Alderis Tweaks/DontEatMyContent Tweaks/FLEXing/libflex Tweaks/iSponsorBlock Tweaks/Return-YouTube-Dislikes Tweaks/YTABConfig Tweaks/YouGroupSettings Tweaks/YouLoop Tweaks/YouMute Tweaks/YouPiP Tweaks/YouQuality Tweaks/YouTimeStamp Tweaks/YTHoldForSpeed Tweaks/YTSpeed Tweaks/YTUHD Tweaks/YTVideoOverlay 
+SUBPROJECTS += Tweaks/Alderis Tweaks/DontEatMyContent Tweaks/FLEXing/libflex Tweaks/iSponsorBlock Tweaks/Return-YouTube-Dislikes Tweaks/YTABConfig Tweaks/YouGroupSettings Tweaks/YouLoop Tweaks/YouMute Tweaks/YouPiP Tweaks/YouQuality Tweaks/YouTimeStamp Tweaks/YTHoldForSpeed Tweaks/YTSpeed Tweaks/YTUHD Tweaks/YTVideoOverlay
 include $(THEOS_MAKE_PATH)/aggregate.mk
 endif
 include $(THEOS_MAKE_PATH)/tweak.mk
@@ -43,7 +46,6 @@ REMOVE_EXTENSIONS = 1
 CODESIGN_IPA = 0
 
 YTLITE_PATH = Tweaks/YTLite
-YTLITE_VERSION := 5.0.1
 YTLITE_DEB = $(YTLITE_PATH)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.deb
 YTLITE_DYLIB = $(YTLITE_PATH)/var/jb/Library/MobileSubstrate/DynamicLibraries/YTLite.dylib
 YTLITE_BUNDLE = $(YTLITE_PATH)/var/jb/Library/Application\ Support/YTLite.bundle
