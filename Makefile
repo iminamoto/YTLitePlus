@@ -15,6 +15,7 @@ export Alderis_XCODEFLAGS = DYLIB_INSTALL_NAME_BASE=/Library/Frameworks BUILD_LI
 export libcolorpicker_LDFLAGS = -F$(TARGET_PRIVATE_FRAMEWORK_PATH) -install_name @rpath/libcolorpicker.dylib
 export ADDITIONAL_CFLAGS = -I$(THEOS_PROJECT_DIR)/Tweaks/RemoteLog -I$(THEOS_PROJECT_DIR)/Tweaks
 
+INSTALL_TARGET_PROCESSES = YouTube
 TWEAK_NAME = YTLitePlus
 DISPLAY_NAME = YouTube
 BUNDLE_ID = com.google.ios.youtube
