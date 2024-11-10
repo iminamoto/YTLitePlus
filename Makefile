@@ -1,21 +1,21 @@
-TARGET = iphone:clang:16.5:14.0
-SDK_PATH = $(THEOS)/sdks/iPhoneOS16.5.sdk/
-SYSROOT = $(SDK_PATH)
-ARCHS = arm64
+export TARGET = iphone:clang:16.5:14.0
+export SDK_PATH = $(THEOS)/sdks/iPhoneOS16.5.sdk/
+export SYSROOT = $(SDK_PATH)
+export ARCHS = arm64
 MODULES = jailed
-FINALPACKAGE = 1
-CODESIGN_IPA = 0
-REMOVE_EXTENSIONS = 1
-PACKAGE_NAME = $(TWEAK_NAME)
-PACKAGE_VERSION = X.X.X-X.X
+export FINALPACKAGE = 1
+export CODESIGN_IPA = 0
+export REMOVE_EXTENSIONS = 1
+export PACKAGE_NAME = $(TWEAK_NAME)
+export PACKAGE_VERSION = X.X.X-X.X
 
-libcolorpicker_ARCHS = arm64
-libFLEX_ARCHS = arm64
-Alderis_XCODEOPTS = LD_DYLIB_INSTALL_NAME=@rpath/Alderis.framework/Alderis
-Alderis_XCODEFLAGS = DYLIB_INSTALL_NAME_BASE=/Library/Frameworks BUILD_LIBRARY_FOR_DISTRIBUTION=YES ARCHS="$(ARCHS)"
-libcolorpicker_LDFLAGS = -F$(TARGET_PRIVATE_FRAMEWORK_PATH) -install_name @rpath/libcolorpicker.dylib
-ADDITIONAL_CFLAGS = -I$(THEOS_PROJECT_DIR)/Tweaks/RemoteLog -I$(THEOS_PROJECT_DIR)/Tweaks
-DEBUGFLAG = -ggdb -Wno-unused-command-line-argument -L$(THEOS_OBJ_DIR) -F$(_THEOS_LOCAL_DATA_DIR)/$(THEOS_OBJ_DIR_NAME)/install/Library/Frameworks
+export libcolorpicker_ARCHS = arm64
+export libFLEX_ARCHS = arm64
+export Alderis_XCODEOPTS = LD_DYLIB_INSTALL_NAME=@rpath/Alderis.framework/Alderis
+export Alderis_XCODEFLAGS = DYLIB_INSTALL_NAME_BASE=/Library/Frameworks BUILD_LIBRARY_FOR_DISTRIBUTION=YES ARCHS="$(ARCHS)"
+export libcolorpicker_LDFLAGS = -F$(TARGET_PRIVATE_FRAMEWORK_PATH) -install_name @rpath/libcolorpicker.dylib
+export ADDITIONAL_CFLAGS = -I$(THEOS_PROJECT_DIR)/Tweaks/RemoteLog -I$(THEOS_PROJECT_DIR)/Tweaks
+export DEBUGFLAG = -ggdb -Wno-unused-command-line-argument -L$(THEOS_OBJ_DIR) -F$(_THEOS_LOCAL_DATA_DIR)/$(THEOS_OBJ_DIR_NAME)/install/Library/Frameworks
 
 INSTALL_TARGET_PROCESSES = YouTube
 TWEAK_NAME = YTLitePlus
