@@ -44,18 +44,18 @@ YTLITE_DYLIB = $(YTLITE_PATH)/var/jb/Library/MobileSubstrate/DynamicLibraries/YT
 YTLITE_BUNDLE = $(YTLITE_PATH)/var/jb/Library/Application\ Support/YTLite.bundle
 
 internal-clean::
-    @rm -rf $(YTLITE_PATH)/*
+	@rm -rf $(YTLITE_PATH)/*
 
 before-all::
-    @if [[ ! -f $(YTLITE_DEB) ]]; then \
-        rm -rf $(YTLITE_PATH)/*; \
-        $(PRINT_FORMAT_BLUE) "Downloading YTLite"; \
-        curl -s -L "https://github.com/dayanch96/YTLite/releases/download/v$(YTLITE_VERSION)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.deb" -o $(YTLITE_DEB); \
-        tar -xf $(YTLITE_DEB) -C $(YTLITE_PATH); tar -xf $(YTLITE_PATH)/data.tar* -C $(YTLITE_PATH); \
-        if [[ ! -f $(YTLITE_DYLIB) || ! -d $(YTLITE_BUNDLE) ]]; then \
-            $(PRINT_FORMAT_ERROR) "Failed to extract YTLite"; exit 1; \
-        fi; \
-    fi
+	@if [[ ! -f $(YTLITE_DEB) ]]; then \
+		rm -rf $(YTLITE_PATH)/*; \
+		$(PRINT_FORMAT_BLUE) "Downloading YTLite"; \
+		curl -s -L "https://github.com/dayanch96/YTLite/releases/download/v$(YTLITE_VERSION)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.deb" -o $(YTLITE_DEB); \
+		tar -xf $(YTLITE_DEB) -C $(YTLITE_PATH); tar -xf $(YTLITE_PATH)/data.tar* -C $(YTLITE_PATH); \
+		if [[ ! -f $(YTLITE_DYLIB) || ! -d $(YTLITE_BUNDLE) ]]; then \
+			$(PRINT_FORMAT_ERROR) "Failed to extract YTLite"; exit 1; \
+		fi; \
+    	fi
 
 before-package::
 	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support; cp -r Localizations/YTLitePlus.bundle $(THEOS_STAGING_DIR)/Library/Application\ Support/
