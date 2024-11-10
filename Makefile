@@ -22,7 +22,7 @@ TWEAK_NAME = YTLitePlus
 DISPLAY_NAME = YouTube
 BUNDLE_ID = com.google.ios.youtube
 
-YTLitePlus_FILES = YTLitePlus.xm $(shell find Source -name '*.xm' -o -name '*.x' -o -name '*.m')
+YTLitePlus_FILES = YTLitePlus.xm $(wildcard Source/*.xm) $(wildcard Source/*.x) $(wildcard Source/*.m)
 YTLitePlus_FRAMEWORKS = UIKit Foundation AVFoundation AVKit Photos Accelerate CoreMotion GameController VideoToolbox Security
 YTLitePlus_LIBRARIES = bz2 c++ iconv z
 YTLitePlus_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-but-set-variable -DTWEAK_VERSION=\"$(PACKAGE_VERSION)\"
