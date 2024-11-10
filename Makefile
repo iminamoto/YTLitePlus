@@ -2,6 +2,12 @@ export TARGET = iphone:clang:16.5:14.0
 export SDK_PATH = $(THEOS)/sdks/iPhoneOS16.5.sdk/
 export SYSROOT = $(SDK_PATH)
 export ARCHS = arm64
+export MODULES = jailed
+export FINALPACKAGE = 1
+export CODESIGN_IPA = 0
+export REMOVE_EXTENSIONS = 1
+export PACKAGE_NAME = $(TWEAK_NAME)
+export PACKAGE_VERSION = X.X.X-X.X
 
 export libcolorpicker_ARCHS = arm64
 export libFLEX_ARCHS = arm64
@@ -17,14 +23,12 @@ endif
 
 PACKAGE_NAME = $(TWEAK_NAME)
 PACKAGE_VERSION = X.X.X-X.X
-
 INSTALL_TARGET_PROCESSES = YouTube
 TWEAK_NAME = YTLitePlus
 DISPLAY_NAME = YouTube
 BUNDLE_ID = com.google.ios.youtube
 
 $(TWEAK_NAME)_FILES = YTLitePlus.xm $(shell find Source -name '*.xm' -o -name '*.x' -o -name '*.m')
-
 $(TWEAK_NAME)_FRAMEWORKS = UIKit Foundation AVFoundation AVKit Photos Accelerate CoreMotion GameController VideoToolbox Security
 $(TWEAK_NAME)_LIBRARIES = bz2 c++ iconv z
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-but-set-variable -DTWEAK_VERSION=\"$(PACKAGE_VERSION)\"
@@ -67,10 +71,10 @@ internal-clean::
 ifneq ($(JAILBROKEN),1)
 before-all::
 	@if [[ ! -f $(YTLITE_DEB) ]]; then \
-		rm -rf $(YTLITE_PATH)/*; \
-		$(PRINT_FORMAT_BLUE) "Downloading YTLite"; \
-		curl -s -L "https://github.com/dayanch96/YTLite/releases/download/v$(YTLITE_VERSION)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.deb" -o $(YTLITE_DEB); \
-		tar -xf $(YTLITE_DEB) -C $(YTLITE_PATH); tar -xf $(YTLITE_PATH)/data.tar* -C $(YTLITE_PATH); \
+	rm -rf $(YTLITE_PATH)/*; \
+        $(PRINT_FORMAT_BLUE) "Downloading YTLite"; \
+        curl -s -L "https://github.com/dayanch96/YTLite/releases/download/v$(YTLITE_VERSION)/com.dvntm.ytlite_$(YTLITE_VERSION)_iphoneos-arm64.deb" -o $(YTLITE_DEB); \
+        tar -xf $(YTLITE_DEB) -C $(YTLITE_PATH); tar -xf $(YTLITE_PATH)/data.tar* -C $(YTLITE_PATH); \
   	      if [[ ! -f $(YTLITE_DYLIB) || ! -d $(YTLITE_BUNDLE) ]]; then \
   	          $(PRINT_FORMAT_ERROR) "Failed to extract YTLite"; exit 1; \
    	     fi; \
