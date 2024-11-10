@@ -62,7 +62,7 @@ YTLITE_DYLIB = $(YTLITE_PATH)/var/jb/Library/MobileSubstrate/DynamicLibraries/YT
 YTLITE_BUNDLE = $(YTLITE_PATH)/var/jb/Library/Application\ Support/YTLite.bundle
 
 internal-clean::
-    @rm -rf $(YTLITE_PATH)/*
+	@rm -rf $(YTLITE_PATH)/*
 
 ifneq ($(JAILBROKEN),1)
 before-all::
