@@ -1,13 +1,7 @@
-export TARGET = iphone:clang:16.5:14.0
+export TARGET = iphone:clang:16.5:15.0
 export SDK_PATH = $(THEOS)/sdks/iPhoneOS16.5.sdk/
 export SYSROOT = $(SDK_PATH)
 export ARCHS = arm64
-MODULES = jailed
-export FINALPACKAGE = 1
-export CODESIGN_IPA = 0
-export REMOVE_EXTENSIONS = 1
-export PACKAGE_NAME = $(TWEAK_NAME)
-export PACKAGE_VERSION = X.X.X-X.X
 
 export libcolorpicker_ARCHS = arm64
 export libFLEX_ARCHS = arm64
@@ -15,7 +9,13 @@ export Alderis_XCODEOPTS = LD_DYLIB_INSTALL_NAME=@rpath/Alderis.framework/Alderi
 export Alderis_XCODEFLAGS = DYLIB_INSTALL_NAME_BASE=/Library/Frameworks BUILD_LIBRARY_FOR_DISTRIBUTION=YES ARCHS="$(ARCHS)"
 export libcolorpicker_LDFLAGS = -F$(TARGET_PRIVATE_FRAMEWORK_PATH) -install_name @rpath/libcolorpicker.dylib
 export ADDITIONAL_CFLAGS = -I$(THEOS_PROJECT_DIR)/Tweaks/RemoteLog -I$(THEOS_PROJECT_DIR)/Tweaks
+
+ifneq ($(JAILBROKEN),1)
 export DEBUGFLAG = -ggdb -Wno-unused-command-line-argument -L$(THEOS_OBJ_DIR) -F$(_THEOS_LOCAL_DATA_DIR)/$(THEOS_OBJ_DIR_NAME)/install/Library/Frameworks
+MODULES = jailed
+endif
+PACKAGE_NAME = $(TWEAK_NAME)
+PACKAGE_VERSION = $(YOUTUBE_VERSION)-$(UYOU_VERSION)
 
 INSTALL_TARGET_PROCESSES = YouTube
 TWEAK_NAME = YTLitePlus
@@ -33,9 +33,11 @@ $(TWEAK_NAME)_EMBED_BUNDLES = $(wildcard Bundles/*.bundle)
 $(TWEAK_NAME)_EMBED_EXTENSIONS = $(wildcard Extensions/*.appex)
 
 include $(THEOS)/makefiles/common.mk
-include $(THEOS_MAKE_PATH)/tweak.mk
+ifneq ($(JAILBROKEN),1)
 SUBPROJECTS += Tweaks/Alderis Tweaks/DontEatMyContent Tweaks/FLEXing/libflex Tweaks/iSponsorBlock Tweaks/Return-YouTube-Dislikes Tweaks/YTABConfig Tweaks/YouGroupSettings Tweaks/YouLoop Tweaks/YouMute Tweaks/YouPiP Tweaks/YouQuality Tweaks/YouTimeStamp Tweaks/YTHoldForSpeed Tweaks/YTUHD Tweaks/YTVideoOverlay
 include $(THEOS_MAKE_PATH)/aggregate.mk
+endif
+include $(THEOS_MAKE_PATH)/tweak.mk
 
 YTLITE_VERSION := 5.0.1
 YTLITE_PATH = Tweaks/YTLite
@@ -46,6 +48,7 @@ YTLITE_BUNDLE = $(YTLITE_PATH)/var/jb/Library/Application\ Support/YTLite.bundle
 internal-clean::
 	@rm -rf $(YTLITE_PATH)/*
 
+ifneq ($(JAILBROKEN),1)
 before-all::
 	@if [[ ! -f $(YTLITE_DEB) ]]; then \
 		rm -rf $(YTLITE_PATH)/*; \
@@ -59,3 +62,4 @@ before-all::
 
 before-package::
 	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support; cp -r lang/YTLitePlus.bundle $(THEOS_STAGING_DIR)/Library/Application\ Support/
+endif
