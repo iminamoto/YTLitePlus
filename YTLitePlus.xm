@@ -175,6 +175,18 @@ BOOL isSelf() {
 - (BOOL)commercePlatformClientEnablePopupWebviewInWebviewDialogController { return NO;}
 %end
 
+// Disable YouTube Plus incompatibility warning popup - @bhackel
+%hook HelperVC
+- (void)viewDidLoad {
+    %orig;
+    // Check if it responds to the selector riskButtonTapped
+    if ([self respondsToSelector:@selector(riskButtonTapped)]) {
+        // Call the selector riskButtonTapped
+        [self performSelector:@selector(riskButtonTapped)];
+    }
+}
+%end
+
 // Hide Upgrade Dialog - @arichornlover
 %hook YTGlobalConfig
 - (BOOL)shouldBlockUpgradeDialog { return YES;}
